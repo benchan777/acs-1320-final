@@ -25,7 +25,8 @@ function App() {
         formed={formed}
         origin={origin}
         fans={(fans * 1000).toLocaleString('en')}
-        likes={isSplit ? '' : <Like />}
+        split={split}
+        likes={isSplit ? <Like /> : ''}
       />
     );
   });
