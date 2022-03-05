@@ -9,13 +9,13 @@ import Like from './Like/Like';
 
 function App() {
   const bandList = data.map(band => {
-    const { band_name, fans, formed, origin, split } = band;
+    const { band_name, fans, formed, origin, split, style } = band;
     let isSplit;
 
     if (split === '-') {
-      isSplit = true;
-    } else {
       isSplit = false;
+    } else {
+      isSplit = true;
     }
 
     return (
@@ -26,7 +26,8 @@ function App() {
         origin={origin}
         fans={(fans * 1000).toLocaleString('en')}
         split={split}
-        likes={isSplit ? <Like /> : ''}
+        style={style}
+        likeComponent={isSplit ? '' : <Like />}
       />
     );
   });
