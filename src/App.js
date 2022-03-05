@@ -1,23 +1,42 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import data from './metal.json';
+
+import Heading from './Heading/Heading';
+import MetalMeta from './MetalMeta/MetalMeta';
+import Band from './Band/Band';
+import Like from './Like/Like';
 
 function App() {
+  const bandList = data.map(band => {
+    const { band_name, fans, formed, origin, split } = band;
+    let isSplit;
+
+    if (split === '-') {
+      isSplit = true;
+    } else {
+      isSplit = false;
+    }
+
+    return (
+      <Band
+        key={band_name}
+        name={band_name}
+        formed={formed}
+        origin={origin}
+        fans={(fans * 1000).toLocaleString('en')}
+        likes={isSplit ? '' : <Like />}
+      />
+    );
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Heading />
+      <MetalMeta />
+      <div className='BandList'>
+        {bandList}
+      </div>
     </div>
   );
 }
